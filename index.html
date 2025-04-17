@@ -751,6 +751,7 @@
 			</ul>
 		</div>
 	</div>
+	<!-- ! key-projects -->
 	<style>
 		.key-projects__list {
 			display: flex;
@@ -942,6 +943,17 @@
 
 			.key-projects__item-slider-slide {
 				padding-inline: 0px;
+			}
+
+			.key-projects__item-text {
+				max-height: 13rem;
+				line-clamp: 7;
+				-webkit-line-clamp: 7;
+			}
+
+			.key-projects__item-more {
+				margin-left: auto;
+				margin-bottom: 15px;
 			}
 		}
 	</style>
@@ -1178,7 +1190,7 @@
 										ее поверхности. Предварительно проводилась подготовка с послойным трамбованием, придающая бетонному
 										полу дополнительную износостойкость.</p>
 								</div>
-								<button class="key-projects__item-more" data-text="Читать далее">Читать далее</button>
+								<button class="key-projects__item-more" data-text="Читать далее"></button>
 								<ul class="key-projects__item-docs">
 									<li>
 										<a href="uploads/images/2024-12-16-vsmbx5.pdf" target="_blank">
@@ -2516,13 +2528,18 @@
 			document.querySelectorAll('.key-projects__item').forEach(item => {
 				const itemText = item.querySelector('.key-projects__item-text')
 				const itemMore = item.querySelector('.key-projects__item-more')
+				const dataText = itemMore.getAttribute('data-text')
+
+				if (dataText) {
+					itemMore.innerText = dataText
+				}
 
 				function toggleButtonText(event) {
 					event.preventDefault()
 					itemText.classList.toggle('expand')
 					itemMore.innerText = itemText.classList.contains('expand')
 						? 'Скрыть'
-						: itemMore.getAttribute('data-text') || 'Читать далее'
+						: dataText || 'Читать далее'
 				}
 
 				if (itemMore && itemText) {
